@@ -303,16 +303,7 @@ func (srv *Srv) OpenSes(cfg SesCfg) (ses *Ses, err error) {
 		mode = C.OCI_DEFAULT | C.OCI_SESSGET_CPOOL | credentialType
 	case DRCPool, SPool:
 		mode = C.OCI_DEFAULT | C.OCI_SESSGET_SPOOL | credentialType
-		if cfg.Mode == SysDba {
-			mode |= C.OCI_SESSGET_SYSDBA
-		}
 	default:
-		switch cfg.Mode {
-		case SysDba:
-			mode |= C.OCI_SYSDBA
-		case SysOper:
-			mode |= C.OCI_SYSOPER
-		}
 	}
 
 	switch poolType {
